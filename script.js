@@ -1,4 +1,4 @@
-// مصفوفة الصور بالأسماء الغريبة اللي ظاهرة في الـ GitHub عندك
+// مصفوفة الصور بالأسماء اللي في صورتك (تأكد من وجود images/ والامتداد .jpeg)
 const images = [
   'images/jpg.1000315417.jpeg', 'images/jpg.1000315429.jpeg', 'images/jpg.1000315415.jpeg',
   'images/jpg.1000315413.jpeg', 'images/jpg.1000315419.jpeg', 'images/jpg.1000315420.jpeg',
@@ -18,7 +18,7 @@ function unlockGift() {
 function showCarousel() {
   document.getElementById('gift-scene').classList.add('hidden');
   document.getElementById('carousel-scene').classList.remove('hidden');
-  updateImage();
+  updateImage(); // مهم جداً عشان أول صورة تظهر
 }
 
 function showMessagePage() {
@@ -31,7 +31,14 @@ function showMessagePage() {
 
 function nextImage() { currentIndex = (currentIndex + 1) % images.length; updateImage(); }
 function prevImage() { currentIndex = (currentIndex - 1 + images.length) % images.length; updateImage(); }
+
 function updateImage() { 
     const imgElement = document.getElementById('carousel-img');
+    // كود إضافي للتأكد إن الصورة بتوصل صح
     imgElement.src = images[currentIndex];
+    
+    // لو الصورة ما ظهرتش، الكود ده هيطبع لك السبب في الـ Console (اضغط F12 لتشوفه)
+    imgElement.onerror = function() {
+        console.error("المتصفح مش لاقي الصورة في المسار ده: " + images[currentIndex]);
+    };
 }
