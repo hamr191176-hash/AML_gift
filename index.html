@@ -2,6 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>هدية خاصة 🌹</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -9,32 +10,32 @@
     <audio id="bgMusic" loop><source src="mp3.1000311463.mpeg" type="audio/mpeg"></audio>
     <audio id="endMusic"><source src="mp3.1000315475.mpeg" type="audio/mpeg"></audio>
 
-    <div class="card">
-        <div id="ui-content">
+    <div class="main-container">
+        <div id="ui-content" class="glass-card">
             <h1>🎁 الهدية الملكية</h1>
             <input type="password" id="password" placeholder="كلمة السر">
-            <button onclick="unlockGift()">افتح الهدية 🌹</button>
-            <p id="error" style="color:red"></p>
-        </div>
-
-        <div id="gift-scene" class="hidden">
-            <h2>🎉 ذاكري عشان تنجحي! ❤️</h2>
-            <button onclick="showCarousel()">استمر إلى الصور ➡️</button>
+            <button class="glow-btn" onclick="unlockGift()">افتح الهدية 🌹</button>
+            <p id="error" style="color:#ff4d4d; margin-top: 10px; font-weight: bold;"></p>
         </div>
 
         <div id="carousel-scene" class="hidden">
-            <img id="carousel-img" src="" style="width:100%; border-radius:10px;">
-            <div style="margin-top:10px;">
-                <button onclick="prevImage()">السابق</button>
-                <button onclick="nextImage()">التالي</button>
+            <div class="carousel-3d-wrapper">
+                <div class="carousel-3d" id="carousel-container">
+                    </div>
             </div>
-            <button onclick="showMessagePage()" style="margin-top:10px; background:green">انتهيت ➡️</button>
+            
+            <div class="controls">
+                <button class="glow-btn small" onclick="rotate(1)">السابق</button>
+                <button class="glow-btn small" onclick="rotate(-1)">التالي</button>
+            </div>
+            <button class="glow-btn finish-btn" onclick="showMessagePage()">انتهيت ❤️</button>
         </div>
 
-        <div id="message-page" class="hidden">
-            <h1>🎉 أنتِ أغلى هدية! ❤️</h1>
+        <div id="message-page" class="hidden glass-card">
+            <h1>🎉 أنتِ أغلى هدية في العالم! ❤️</h1>
         </div>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script src="script.js"></script>
 </body>
