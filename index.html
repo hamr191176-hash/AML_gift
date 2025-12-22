@@ -4,108 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>هدية خاصة 🌹</title>
-    <style>
-        body {
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: radial-gradient(circle, #1a1a1a 0%, #000 100%);
-            color: white;
-            font-family: Arial, sans-serif;
-            perspective: 1200px;
-            overflow: hidden;
-        }
-
-        .hidden { display: none !important; }
-
-        /* كارت الزجاج */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 40px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-        }
-
-        input {
-            padding: 12px;
-            border-radius: 10px;
-            border: none;
-            margin-bottom: 20px;
-            width: 200px;
-            text-align: center;
-        }
-
-        /* الأزرار الـ 3D المنورة */
-        .glow-btn {
-            padding: 15px 35px;
-            font-size: 18px;
-            font-weight: bold;
-            color: white;
-            background: linear-gradient(145deg, #ff0055, #cc0044);
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 8px 15px rgba(255, 0, 85, 0.3), 0 0 20px rgba(255, 0, 85, 0.2);
-            display: block;
-            margin: 0 auto;
-        }
-
-        .glow-btn:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 30px rgba(255, 0, 85, 0.6), 0 0 40px rgba(255, 0, 85, 0.4);
-            filter: brightness(1.2);
-        }
-
-        .glow-btn.small { padding: 10px 25px; font-size: 14px; margin: 0 10px; }
-
-        /* حاوية الصور الـ 3D */
-        .carousel-3d-wrapper {
-            width: 250px;
-            height: 350px;
-            margin: 0 auto 100px auto;
-        }
-
-        .carousel-3d {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 1s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        .carousel-3d img {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 15px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
-        }
-
-        .controls {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 30px;
-        }
-
-        .finish-btn { background: linear-gradient(145deg, #00ff88, #00cc66); box-shadow: 0 8px 15px rgba(0, 255, 136, 0.3); }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- موسيقى خلفية (غير الـ src لو عندك ملفات mp3 حقيقية) -->
-    <audio id="bgMusic" loop>
-        <source src="https://www.soundjay.com/misc/sounds/romantic-music-01.wav" type="audio/wav">
-    </audio>
-    <audio id="endMusic">
-        <source src="https://www.soundjay.com/misc/sounds/applause-01.wav" type="audio/wav">
-    </audio>
+    <audio id="bgMusic" loop><source src="https://www.soundjay.com/misc/sounds/romantic-music-01.wav" type="audio/wav"></audio>
+    <audio id="endMusic"><source src="https://www.soundjay.com/misc/sounds/applause-01.wav" type="audio/wav"></audio>
 
     <div class="main-container">
         <div id="ui-content" class="glass-card">
@@ -132,70 +35,7 @@
         </div>
     </div>
 
-    <!-- مكتبة confetti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <script>
-        // مصفوفة الصور (استخدمت مساراتك الأصلية مع fallback)
-        const images = [
-            'images/jpg.1000315417.jpeg', 'images/jpg.1000315429.jpeg', 'images/jpg.1000315415.jpeg',
-            'images/jpg.1000315413.jpeg', 'images/jpg.1000315419.jpeg', 'images/jpg.1000315420.jpeg',
-            'images/jpg.1000315414.jpeg', 'images/jpg.1000315431.jpeg', 'images/jpg.1000315418.jpeg'
-        ];
-
-        let rotation = 0;
-
-        function unlockGift() {
-            const pass = document.getElementById('password').value;
-            if (pass === "123") {  // غير كلمة المرور هنا لو عايز
-                document.getElementById('ui-content').classList.add('hidden');
-                document.getElementById('carousel-scene').classList.remove('hidden');
-                const bgMusic = document.getElementById('bgMusic');
-                bgMusic.play().catch(e => console.log('خطأ في تشغيل الموسيقى:', e));  // تحقق من الأخطاء
-                setup3DCarousel();
-                confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
-            } else {
-                document.getElementById('error').innerText = "الباسورد غلط يا نجم! 😂";
-            }
-        }
-
-        function setup3DCarousel() {
-            const container = document.getElementById('carousel-container');
-            container.innerHTML = '';
-            const angleStep = 360 / images.length;
-            const radius = 150 + (images.length * 10);  // ديناميكي عشان يناسب عدد الصور
-            
-            images.forEach((src, i) => {
-                const img = document.createElement('img');
-                img.src = src + "?v=" + Math.random();  // لضمان عدم تحميل صورة قديمة
-                img.style.transform = `rotateY(${i * angleStep}deg) translateZ(${radius}px)`;
-                
-                // إذا فشل تحميل الصورة، جرب مسار احتياطي أو placeholder
-                img.onerror = function() {
-                    console.log('فشل تحميل الصورة:', src);
-                    this.src = 'https://via.placeholder.com/300x400?text=صورة+غير+متوفرة';  // placeholder
-                };
-                
-                container.appendChild(img);
-            });
-        }
-
-        function rotate(direction) {
-            const angleStep = 360 / images.length;
-            rotation += (direction * angleStep);
-            document.getElementById('carousel-container').style.transform = `rotateY(${rotation}deg)`;
-        }
-
-        function showMessagePage() {
-            document.getElementById('bgMusic').pause();
-            const endMusic = document.getElementById('endMusic');
-            endMusic.play().catch(e => console.log('خطأ في تشغيل الموسيقى النهائية:', e));
-            document.getElementById('carousel-scene').classList.add('hidden');
-            document.getElementById('message-page').classList.remove('hidden');
-            confetti({ particleCount: 200, spread: 100 });
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
-</body>
-</html>
-
