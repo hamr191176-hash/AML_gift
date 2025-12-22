@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>هدية خاصة 🌹</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="space-bg"></div>
+<div class="flower-header">🌸🌹💐🌹🌸</div>
+
+<audio id="bgMusic" loop><source src="1000311463.mp3" type="audio/mpeg"></audio>
+<audio id="endMusic"><source src="1000315475.mp3" type="audio/mpeg"></audio>
+
+<main class="container">
+  <div class="card" id="card">
+    <div id="ui-content">
+        <h1>🎁 الهدية الملكية</h1>
+        <p>أدخل كلمة السر لفتح المفاجأة</p>
+        <input type="password" id="password" placeholder="كلمة السر">
+        <button id="giftBtn" onclick="unlockGift()">
+          <span class="btn-text"><i class="fas fa-gift"></i> افتح الهدية 🌹</span>
+        </button>
+        <p class="error" id="error" style="color:#f87171; margin-top:10px;"></p>
+    </div>
+
+    <div id="gift-scene" class="hidden">
+        <div class="box-3d">
+            <div class="face front"></div>
+            <div class="face back"></div>
+            <div class="face left"></div>
+            <div class="face right"></div>
+            <div class="face top" id="lid"></div>
+            <div class="face bottom"></div>
+        </div>
+        <h2 class="reveal-text">🎉 ذاكري عشان تنجحي! <br> مفاجات إيه وكلام فاضي إيه 😂 ❤️</h2>
+        <button class="next-stage-btn" onclick="showCarousel()">استمر إلى الصور ➡️</button>
+    </div>
+
+    <div id="carousel-scene" class="hidden">
+      <div class="carousel">
+        <img id="carousel-img" src="images/1000315417.jpg" alt="Photo">
+        <div class="nav-btns">
+            <button onclick="prevImage()">⬅️ السابق</button>
+            <button onclick="nextImage()">التالي ➡️</button>
+        </div>
+      </div>
+      <button class="next-stage-btn" onclick="showMessagePage()">انتهيت ➡️</button>
+    </div>
+
+    <div id="message-page" class="hidden">
+      <h1>🎉 "أنتِ أغلى هدية في حياتي! ❤️"</h1>
+    </div>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
