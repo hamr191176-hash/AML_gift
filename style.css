@@ -13,7 +13,6 @@ body {
 
 .hidden { display: none !important; }
 
-/* كارت الزجاج */
 .glass-card {
     background: rgba(255, 255, 255, 0.05);
     padding: 40px;
@@ -33,7 +32,6 @@ input {
     text-align: center;
 }
 
-/* الأزرار الـ 3D المنورة */
 .glow-btn {
     padding: 15px 35px;
     font-size: 18px;
@@ -57,7 +55,6 @@ input {
 
 .glow-btn.small { padding: 10px 25px; font-size: 14px; margin: 0 10px; }
 
-/* حاوية الصور الـ 3D */
 .carousel-3d-wrapper {
     width: 250px;
     height: 350px;
