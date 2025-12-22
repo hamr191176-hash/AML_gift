@@ -1,9 +1,10 @@
-// مصفوفة الصور بالأسماء اللي في صورتك (تأكد من وجود images/ والامتداد .jpeg)
+// مصفوفة الصور بالأسماء الدقيقة التي ظهرت في صورتك
 const images = [
   'images/jpg.1000315417.jpeg', 'images/jpg.1000315429.jpeg', 'images/jpg.1000315415.jpeg',
   'images/jpg.1000315413.jpeg', 'images/jpg.1000315419.jpeg', 'images/jpg.1000315420.jpeg',
   'images/jpg.1000315414.jpeg', 'images/jpg.1000315431.jpeg', 'images/jpg.1000315418.jpeg'
 ];
+
 let currentIndex = 0;
 
 function unlockGift() {
@@ -18,7 +19,7 @@ function unlockGift() {
 function showCarousel() {
   document.getElementById('gift-scene').classList.add('hidden');
   document.getElementById('carousel-scene').classList.remove('hidden');
-  updateImage(); // مهم جداً عشان أول صورة تظهر
+  updateImage(); 
 }
 
 function showMessagePage() {
@@ -34,11 +35,14 @@ function prevImage() { currentIndex = (currentIndex - 1 + images.length) % image
 
 function updateImage() { 
     const imgElement = document.getElementById('carousel-img');
-    // كود إضافي للتأكد إن الصورة بتوصل صح
+    // محاولة تحميل الصورة بالمسار المكتوب
     imgElement.src = images[currentIndex];
     
-    // لو الصورة ما ظهرتش، الكود ده هيطبع لك السبب في الـ Console (اضغط F12 لتشوفه)
+    // لو الصورة لم تظهر (خطأ في المسار)، سيحاول الكود البحث عنها بدون اسم الفولدر كحل احتياطي
     imgElement.onerror = function() {
-        console.error("المتصفح مش لاقي الصورة في المسار ده: " + images[currentIndex]);
+        const fallbackSrc = images[currentIndex].replace('images/', '');
+        if (imgElement.src !== window.location.origin + '/' + fallbackSrc) {
+            imgElement.src = fallbackSrc;
+        }
     };
 }
