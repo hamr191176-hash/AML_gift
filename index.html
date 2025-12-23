@@ -7,15 +7,22 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <audio id="bgMusic" loop><source src="https://www.soundjay.com/misc/sounds/romantic-music-01.wav" type="audio/wav"></audio>
-    <audio id="endMusic"><source src="https://www.soundjay.com/misc/sounds/applause-01.wav" type="audio/wav"></audio>
+    <!-- خلفية متحركة بـ D3.js (أشجار وورود) -->
+    <svg id="background-canvas"></svg>
+
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundjay.com/misc/sounds/romantic-music-01.wav" type="audio/wav">
+    </audio>
+    <audio id="endMusic">
+        <source src="https://www.soundjay.com/misc/sounds/applause-01.wav" type="audio/wav">
+    </audio>
 
     <div class="main-container">
         <div id="ui-content" class="glass-card">
-            <h1>🎁 الهدية الملكية</h1>
+            <h1>🎁 هدية عيد ميلادك الخاص 🌹</h1>
             <input type="password" id="password" placeholder="كلمة السر">
             <button class="glow-btn" onclick="unlockGift()">افتح الهدية 🌹</button>
-            <p id="error" style="color:#ff4d4d; margin-top: 10px; font-weight: bold;"></p>
+            <p id="error" style="color:#ff4d4d; margin-top: 20px; font-weight: bold;"></p>
         </div>
 
         <div id="carousel-scene" class="hidden">
@@ -31,11 +38,14 @@
         </div>
 
         <div id="message-page" class="hidden glass-card">
-            <h1>🎉 أنتِ أغلى هدية في العالم! ❤️</h1>
+            <h1>🎉 عيد ميلاد سعيد! أنتِ أغلى هدية في العالم! 🌸</h1>
         </div>
     </div>
 
+    <!-- مكتبات خارجية -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
+
